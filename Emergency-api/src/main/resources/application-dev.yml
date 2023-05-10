@@ -1,0 +1,49 @@
+server:
+  port: 2333
+spring:
+  datasource:
+    username: AnselYuki
+    password: 18670054724
+    url: jdbc:mysql://localhost:3306/Emergency-logistics
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: 123456
+        allow:
+        deny:
+        url-pattern: /druid/*
+  servlet:
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-request-size: 100MB #最大请求文件的大小
+      max-file-size: 20MB #设置单个文件最大长度
+      file-size-threshold: 20MB #当文件达到多少时进行磁盘写入
+mybatis:
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+  type-aliases-package: cn.anselyuki.common.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  swagger-ui:
+    # 修改Swagger UI路径
+    path: /swagger-ui.html
+    # 开启Swagger UI界面
+    enabled: true
+  api-docs:
+    # 修改api-docs路径
+    path: /v3/api-docs
+    # 开启api-docs
+    enabled: true
+  # 配置需要生成接口文档的扫描包
+  packages-to-scan: cn.anselyuki
